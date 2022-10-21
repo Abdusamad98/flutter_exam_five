@@ -4,6 +4,7 @@ import 'package:flutter_exam_five/cubits/categories_cubit/categories_cubit.dart'
 import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
 import 'package:flutter_exam_five/data/my_repository/my_repository.dart';
 import 'package:flutter_exam_five/data/services/api_provider.dart';
+import 'package:flutter_exam_five/data/services/local_notification_service.dart';
 import 'package:flutter_exam_five/pages/main_page.dart';
 
 // categories
@@ -11,6 +12,8 @@ import 'package:flutter_exam_five/pages/main_page.dart';
 //products
 // https://third-exam.free.mockoapp.net/categories/{id}
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.localNotificationService.init();
   runApp(MyApp());
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/categories_cubit/categories_cubit.dart';
 import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
+import 'package:flutter_exam_five/data/services/local_notification_service.dart';
 import 'package:formz/formz.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -84,12 +85,15 @@ class _ProductsPageState extends State<ProductsPage> {
                     ]),
                   ),
                   Positioned(
-                    right: 0,
-                    top: 0,
+                      right: 0,
+                      top: 0,
                       child: IconButton(
-                    icon: const Icon(Icons.favorite),
-                    onPressed: () {},
-                  ))
+                        icon: const Icon(Icons.favorite),
+                        onPressed: () {
+                          LocalNotificationService.localNotificationService
+                              .scheduleNotification(item.productName);
+                        },
+                      ))
                 ]);
               }),
             ),
