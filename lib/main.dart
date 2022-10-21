@@ -5,9 +5,12 @@ import 'package:flutter_exam_five/data/repos/category_repo.dart';
 import 'package:flutter_exam_five/data/services/api_client.dart';
 import 'package:flutter_exam_five/data/services/api_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
 import 'package:flutter_exam_five/ui/categories/categories_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.localNotificationService.init();
   runApp(const MyApp());
 }
 
