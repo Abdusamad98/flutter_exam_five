@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exam_five/app/app.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SizedBox(),
-    );
-  }
+  runApp(const App());
 }
