@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/categories_cubit/categories_cubit.dart';
+import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
+import 'package:flutter_exam_five/ui/widgets/custom_container.dart';
+import 'package:flutter_exam_five/ui/widgets/products_container.dart';
 import 'package:formz/formz.dart';
 
 class ProductsUI extends StatelessWidget {
@@ -8,12 +11,14 @@ class ProductsUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     BlocProvider.of<CategoriesCubit>(context).fetchCategories();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products", style: TextStyle(color: Colors.black),),
+        title: const Text(
+          "Products",
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -22,49 +27,64 @@ class ProductsUI extends StatelessWidget {
         children: [
           BlocBuilder<CategoriesCubit, CategoriesState>(
             builder: (context, state) {
-              if(state.status == FormzStatus.submissionInProgress){
+              if (state.status == FormzStatus.submissionInProgress) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if(state.status == FormzStatus.submissionFailure){
+              if (state.status == FormzStatus.submissionFailure) {
                 return Center(child: Text(state.errorText));
               }
-              if(state.status == FormzStatus.submissionSuccess){
+              if (state.status == FormzStatus.submissionSuccess) {
                 return SizedBox(
                   height: 100,
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     children: List.generate(
                       state.categories.length,
-                          (index) => Container(
-                            margin: const EdgeInsets.all(16),
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 4,
-                                blurRadius: 5,
-                                offset: const Offset(1, 3))
-                          ],
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Image.network(state.categories[index].imageUrl),
-                              const SizedBox(width: 15),
-                              Text(state.categories[index].name),
-                              const SizedBox(width: 15),
-                            ],
-                          ),
-                        ),
+                      (index) => CustomContainer(
+                        name: state.categories[index].name,
+                        imageURL: state.categories[index].imageUrl,
+                        onTap: () {
+                          BlocProvider.of<ProductsCubit>(context)
+                              .fetchProductsByID(
+                                  id: state.categories[index].id);
+                        },
                       ),
                     ),
                   ),
                 );
+              } else {
+                return const SizedBox();
               }
-              else {
+            },
+          ),
+          const SizedBox(height: 10),
+          BlocConsumer<ProductsCubit, ProductsState>(
+            listener: (context, state) {
+              print("xozir ui $state ga o'tdi");
+            },
+            builder: (context, state) {
+              if (state is ProductsInProgress) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is ProductsInFailure) {
+                return const Center(child: Text("error"));
+              }
+              if (state is ProductsInSuccess) {
+                return Expanded(
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: List.generate(
+                      state.products.length,
+                      (index) => ProductsContainer(
+                        imageURL: state.products[index].imageUrl,
+                        name: state.products[index].name,
+                        price: state.products[index].price.toString(),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
                 return const SizedBox();
               }
             },
@@ -74,3 +94,5 @@ class ProductsUI extends StatelessWidget {
     );
   }
 }
+
+

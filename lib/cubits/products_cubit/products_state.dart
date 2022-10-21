@@ -16,5 +16,5 @@ class ProductsInSuccess extends ProductsState {
 class ProductsInFailure extends ProductsState{
   ProductsInFailure({required this.errorText});
 
-  final String errorText;
+   String errorText;
 }
