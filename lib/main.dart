@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/categories/categories_cubit.dart';
 import 'package:flutter_exam_five/data/repositories/categories_repository.dart';
+import 'package:flutter_exam_five/data/repositories/products_repository.dart';
 import 'package:flutter_exam_five/data/services/api/open_api/open_api_client.dart';
 import 'package:flutter_exam_five/data/services/api/open_api/open_api_service.dart';
 import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
 import 'package:flutter_exam_five/utils/constants.dart';
 import 'package:flutter_exam_five/views/router/router.dart';
+
+import 'cubits/products/products_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,13 @@ void main() {
               openApiService: openApiService,
             ),
           )..getCategories(),
+        ),
+        BlocProvider(
+          create: (context) => ProductsCubit(
+            productsRepository: ProductsRepository(
+              openApiService: openApiService,
+            ),
+          ),
         ),
       ],
       child: const App(),
