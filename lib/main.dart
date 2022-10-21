@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
 import 'package:flutter_exam_five/views/router/router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.localNotificationService.init();
   runApp(const MyApp());
 }
 
