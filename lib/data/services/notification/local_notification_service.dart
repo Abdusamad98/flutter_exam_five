@@ -86,8 +86,8 @@ class LocalNotificationService {
     int id = random.nextInt(1000);
     flutterLocalNotificationsPlugin.show(
       id,
-      "Ibrohim",
-      "Bugun darsga borolmayman",
+      "Shop",
+      "Something",
       NotificationDetails(
         android: AndroidNotificationDetails(
           androidNotificationChannel.id,
@@ -110,14 +110,14 @@ class LocalNotificationService {
     int id = random.nextInt(1000);
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
-      "scheduleNotification",
-      "EXAMPLE",
+      title,
+      body,
       tz.TZDateTime.now(tz.local).add(const Duration(seconds: 15)),
       NotificationDetails(
         android: AndroidNotificationDetails(
           androidNotificationChannel.id,
           androidNotificationChannel.name,
-          channelDescription: 'To remind you about upcoming birthdays',
+          channelDescription: 'To show product on 15 sec',
         ),
       ),
       payload: "No data",

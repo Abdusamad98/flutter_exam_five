@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/categories/categories_cubit.dart';
+import 'package:flutter_exam_five/cubits/products/products_cubit.dart';
+import 'package:flutter_exam_five/utils/constants.dart';
 import 'package:flutter_exam_five/views/categories/widgets/category_item_view.dart';
 import 'package:formz/formz.dart';
 
@@ -28,7 +30,16 @@ class CategoriesScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CategoryItemView(
                   categoryModel: state.categories[index],
-                  onTap: () {},
+                  onTap: () {
+                    context
+                        .read<ProductsCubit>()
+                        .getProductsByCatId(id: state.categories[index].id);
+                    Navigator.pushNamed(
+                      context,
+                      products,
+                      arguments: state.categories[index].name,
+                    );
+                  },
                 );
               },
               itemCount: state.categories.length,
