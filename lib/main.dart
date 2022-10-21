@@ -1,20 +1,34 @@
-import 'package:flutter/material.dart';
 
-void main() {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'home/cubit/main_cubit.dart';
+import 'home/views/main_view.dart';
+
+void main(List<String> args) {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Flutter Demo",
+      
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: const ColorScheme.light(
+          primary: CupertinoColors.quaternarySystemFill,
+          brightness: Brightness.light,
+        ),
       ),
-      home: SizedBox(),
+      home: BlocProvider(
+        create: (context) => MainCubit(),
+        child: const MainView(),
+      ),
     );
   }
 }
