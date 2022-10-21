@@ -8,6 +8,5 @@ class CategoriesRepository {
   Future<List<CategoryModel>> getAllCategories() async =>
       apiProvider.getAllCategories();
 
-  Future<CategoryModel> getCategoryById(int id) async =>
-      apiProvider.getCategoryById(id);
+  
 }

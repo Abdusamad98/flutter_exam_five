@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_exam_five/data/models/category_model/category_model.dart';
+import 'package:flutter_exam_five/data/models/product_model/product_model.dart';
 import 'package:flutter_exam_five/data/services/api_client.dart';
 import 'package:flutter_exam_five/utils/constants.dart';
 
@@ -26,11 +27,15 @@ class ApiProvider {
     }
   }
 
-  Future<CategoryModel> getCategoryById(int id) async {
+  Future<List<ProductModel>> getProductsByCategoryId(int id) async {
     try {
       Response response = await apiClient.dio.get("$baseUrl$categories/$id");
       if (response.statusCode == HttpStatus.ok) {
-        return CategoryModel.fromJson(response.data);
+        List<ProductModel> products = (response.data as List?)
+                ?.map((product) => ProductModel.fromJson(product))
+                .toList() ??
+            [];
+        return products;
       } else {
         throw Exception();
       }
