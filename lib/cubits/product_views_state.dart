@@ -10,7 +10,7 @@ class ProductViewsInProgress extends ProductViewsState {}
 class ProductViewsInSuccess extends ProductViewsState {
   ProductViewsInSuccess({required this.views});
 
-  List<ProductItem> views;
+  List<ProductModel> views;
 }
 
 class ProductViewsInFailure extends ProductViewsState {

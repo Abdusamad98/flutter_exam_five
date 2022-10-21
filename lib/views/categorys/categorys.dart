@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_exam_five/cubits/categry_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/data/models/product_item.dart';
+import 'package:flutter_exam_five/views/products.dart';
 import 'package:formz/formz.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -28,6 +29,9 @@ appBar: AppBar(title: Text("Categorys"),),
               children: List.generate(category.length, (index) =>
 
                   GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Products(id: category[index].id,),));
+                    },
                     child: Container(
                       margin: const EdgeInsets.all(10),
                       child: Row(children: [
