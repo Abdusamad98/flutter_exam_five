@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_exam_five/cubits/categories/categories_cubit.dart';
+import 'package:flutter_exam_five/data/repositories/categories_repository.dart';
+import 'package:flutter_exam_five/data/services/api/open_api/open_api_client.dart';
+import 'package:flutter_exam_five/data/services/api/open_api/open_api_service.dart';
 import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
 import 'package:flutter_exam_five/utils/constants.dart';
 import 'package:flutter_exam_five/views/router/router.dart';
@@ -6,11 +11,27 @@ import 'package:flutter_exam_five/views/router/router.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotificationService.localNotificationService.init();
-  runApp(const MyApp());
+  OpenApiService openApiService =
+      OpenApiService(openApiClient: OpenApiClient());
+  // I will not use Multi repository. However I don't need to it.
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoriesCubit(
+            categoriesRepository: CategoriesRepository(
+              openApiService: openApiService,
+            ),
+          )..getCategories(),
+        ),
+      ],
+      child: const App(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   // This widget is the root of your application.
   @override
