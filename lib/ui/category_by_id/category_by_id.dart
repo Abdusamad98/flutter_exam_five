@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/get_category_by_id/get_category_by_id_cubit.dart';
+import 'package:flutter_exam_five/notification/local_notification.dart';
 
 class CategoryByIdScreen extends StatelessWidget {
   final int categoryId;
@@ -65,30 +66,44 @@ class CategoryByIdScreen extends StatelessWidget {
                 itemCount: state.category.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(state.category[index].name),
-                        SizedBox(height: 7),
-                        Text("${state.category[index].price}So'm"),
-                        SizedBox(height: 7),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            state.category[index].imageUrl,
-                            width: 100,
+                    child: Stack(children: [
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: IconButton(
+                            onPressed: () {
+                              LocalNotificationService.localNotificationService
+                                  .scheduleNotification(15);
+                            },
+                            icon: Icon(
+                              Icons.add_shopping_cart,
+                              color: Colors.red,
+                            )),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(state.category[index].name),
+                          SizedBox(height: 7),
+                          Text("${state.category[index].price}So'm"),
+                          SizedBox(height: 7),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              state.category[index].imageUrl,
+                              width: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 7),
-                        Text(state.category[index].description),
-                      ],
-                    ),
+                          SizedBox(height: 7),
+                          Text(state.category[index].description),
+                        ],
+                      ),
+                    ]),
                   );
                 },
               ),

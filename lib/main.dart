@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/get_categories/get_categories_cubit.dart';
 import 'package:flutter_exam_five/cubits/get_category_by_id/get_category_by_id_cubit.dart';
+import 'package:flutter_exam_five/notification/local_notification.dart';
 import 'package:flutter_exam_five/ui/home/categories_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.localNotificationService.init();
   runApp(const MyApp());
 }
 
