@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exam_five/views/router/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SizedBox(),
+      home: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRouter.generateRoute,
+      ),
     );
   }
 }
