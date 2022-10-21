@@ -20,14 +20,14 @@ class ProductsScreen extends StatelessWidget {
       body: Column(
         children: [
           BlocListener<ProductsCubit, ProductsState>(listener: (contex, state) {
-          if (state is ProductsOnFailure) {
-            debugPrint("ProductsOnFailure");
-          } else if (state is ProductsOnProgress) {
-            debugPrint("ProductsOnProgress");
-          } else if (state is ProductsOnSuccess) {
-            debugPrint("ProductsOnSuccess");
-          }
-        }),
+            if (state is ProductsOnFailure) {
+              debugPrint("ProductsOnFailure");
+            } else if (state is ProductsOnProgress) {
+              debugPrint("ProductsOnProgress");
+            } else if (state is ProductsOnSuccess) {
+              debugPrint("ProductsOnSuccess");
+            }
+          },child: SizedBox(),),
           Expanded(
             child: BlocBuilder<ProductsCubit, ProductsState>(
               builder: (context, state) {
@@ -39,7 +39,8 @@ class ProductsScreen extends StatelessWidget {
                   return GridView.builder(
                     itemCount: state.products.length,
                     padding: const EdgeInsets.all(10),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                       crossAxisCount: 2,
