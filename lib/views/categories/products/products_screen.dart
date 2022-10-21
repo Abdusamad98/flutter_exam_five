@@ -22,9 +22,9 @@ class ProductsScreen extends StatelessWidget {
           BlocListener<ProductsCubit, ProductsState>(listener: (contex, state) {
             if (state is ProductsOnFailure) {
               debugPrint("ProductsOnFailure");
-            } else if (state is ProductsOnProgress) {
+            }  if (state is ProductsOnProgress) {
               debugPrint("ProductsOnProgress");
-            } else if (state is ProductsOnSuccess) {
+            }  if (state is ProductsOnSuccess) {
               debugPrint("ProductsOnSuccess");
             }
           },child: SizedBox(),),
