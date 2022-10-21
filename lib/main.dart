@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
+import 'package:flutter_exam_five/utils/constants.dart';
 import 'package:flutter_exam_five/views/router/router.dart';
 
 void main() {
@@ -15,12 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: categories,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
-      home: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }
