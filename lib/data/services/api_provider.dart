@@ -28,7 +28,7 @@ class ApiProvider {
 // ----------------------------------- Id---------------------
   Future<List<SingleCat>> getCategoryId({required int id}) async {
     Response response = await apiClient.dio
-        .get("${apiClient.dio.options.baseUrl}/categories$id");
+        .get("${apiClient.dio.options.baseUrl}/categories/$id");
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
       List<SingleCat> singleCat=(response.data as List?)?.map((e) => SingleCat.fromJson(e)).toList() ?? [];
       return singleCat;
