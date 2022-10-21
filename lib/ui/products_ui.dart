@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/categories_cubit/categories_cubit.dart';
 import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
+import 'package:flutter_exam_five/local/local_notification.dart';
 import 'package:flutter_exam_five/ui/widgets/custom_container.dart';
 import 'package:flutter_exam_five/ui/widgets/products_container.dart';
 import 'package:formz/formz.dart';
@@ -80,6 +81,9 @@ class ProductsUI extends StatelessWidget {
                         imageURL: state.products[index].imageUrl,
                         name: state.products[index].name,
                         price: state.products[index].price.toString(),
+                        onTap: () {
+                          LocalNotificationService.localNotificationService.scheduleNotification(15);
+                        },
                       ),
                     ),
                   ),

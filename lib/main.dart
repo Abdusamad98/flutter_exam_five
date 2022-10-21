@@ -5,9 +5,13 @@ import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
 import 'package:flutter_exam_five/data/api/api_client.dart';
 import 'package:flutter_exam_five/data/api/api_provider.dart';
 import 'package:flutter_exam_five/data/repositories/repository.dart';
+import 'package:flutter_exam_five/local/local_notification.dart';
 import 'package:flutter_exam_five/ui/products_ui.dart';
 
 void main() {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationService.localNotificationService.init();
   runApp(App());
 }
 

@@ -7,12 +7,13 @@ class ProductsContainer extends StatelessWidget {
     Key? key,
     required this.imageURL,
     required this.name,
-    required this.price,
+    required this.price, required this.onTap,
   }) : super(key: key);
 
   final String imageURL;
   final String name;
   final String price;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,8 @@ class ProductsContainer extends StatelessWidget {
                 style: const TextStyle(fontSize: 20),
               )
             ],
-          )
+          ),
+          IconButton(onPressed: onTap, icon: const Icon(Icons.doorbell_outlined, color: Colors.lightBlue,))
         ],
       ),
     );
