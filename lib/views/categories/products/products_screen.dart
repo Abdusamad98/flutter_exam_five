@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubits/products/products_cubit.dart';
 import 'package:flutter_exam_five/data/services/notification/local_notification_service.dart';
+import 'package:flutter_exam_five/utils/utils.dart';
 import 'package:flutter_exam_five/views/categories/products/widgets/product_item_view.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -35,6 +36,8 @@ class ProductsScreen extends StatelessWidget {
                 return ProductsItemView(
                   productModel: state.products[index],
                   onTap: () {
+                    UtilityFunctions.getMyToast(
+                        message: "It will showed in 15 sec");
                     LocalNotificationService.localNotificationService
                         .scheduleNotification(
                       title: "Shop",
