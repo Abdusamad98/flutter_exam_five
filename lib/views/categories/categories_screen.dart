@@ -24,7 +24,7 @@ class CategoriesScreen extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(),
             );
           } else if (state.status == FormzStatus.submissionFailure) {
-            return const Text("Error occured");
+            return Text(state.errorText);
           } else if (state.status == FormzStatus.submissionSuccess) {
             return ListView.builder(
               itemBuilder: (context, index) {

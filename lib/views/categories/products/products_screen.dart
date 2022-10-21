@@ -16,7 +16,17 @@ class ProductsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: BlocBuilder<ProductsCubit, ProductsState>(
+      // I have used bloc_consumer because it has listener also and I don't need to initialize bloc_listener
+      body: BlocConsumer<ProductsCubit, ProductsState>(
+        listener: (contex, state) {
+          if (state is ProductsOnFailure) {
+            debugPrint("ProductsOnFailure");
+          } else if (state is ProductsOnProgress) {
+            debugPrint("ProductsOnProgress");
+          } else if (state is ProductsOnSuccess) {
+            debugPrint("ProductsOnSuccess");
+          }
+        },
         builder: (context, state) {
           if (state is ProductsOnProgress) {
             return const Center(

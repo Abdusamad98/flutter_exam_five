@@ -8,7 +8,7 @@ class UtilityFunctions {
         gravity: ToastGravity.BOTTOM_RIGHT,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.grey,
-        textColor: Colors.black,
+        textColor: Colors.white,
         fontSize: 16.0,
       );
 
