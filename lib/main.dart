@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubit/shop_cubit.dart';
+import 'package:flutter_exam_five/cubit/shop_info_cubit.dart';
 import 'package:flutter_exam_five/routes/router.dart';
 import 'package:flutter_exam_five/service/shop_service.dart';
 
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ShopCubit(shopService: service),
         ),
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
+        BlocProvider(
+          create: (context) => ShopInfoCubit(shopService: service, index: 0),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

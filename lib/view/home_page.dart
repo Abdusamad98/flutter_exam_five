@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubit/shop_cubit.dart';
 import 'package:flutter_exam_five/service/shop_service.dart';
+import 'package:flutter_exam_five/view/info_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,23 +37,26 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
                 itemCount: state.data.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.fromLTRB(width * .03, height * .02, width * .03, 0),
-                    height: height * .14,
-                    decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(20)),
-                    child: Row(children: [
-                      Expanded(
-                          child: Image.network(
-                        state.data[index].imageUrl,
-                        fit: BoxFit.cover,
-                      )),
-                      Expanded(
-                          child: Text(
-                        textAlign: TextAlign.center,
-                        state.data[index].name,
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ))
-                    ]),
+                  return GestureDetector(
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(width * .03, height * .02, width * .03, 0),
+                      height: height * .14,
+                      decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(20)),
+                      child: Row(children: [
+                        Expanded(
+                            child: Image.network(
+                          state.data[index].imageUrl,
+                          fit: BoxFit.cover,
+                        )),
+                        Expanded(
+                            child: Text(
+                          textAlign: TextAlign.center,
+                          state.data[index].name,
+                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                        ))
+                      ]),
+                    ),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage())),
                   );
                 });
           } else if (state is ShopError) {
