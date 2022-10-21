@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exam_five/data/cubits/category_cubit.dart';
+import 'package:flutter_exam_five/data/repos/category_repo.dart';
+import 'package:flutter_exam_five/data/services/api_client.dart';
+import 'package:flutter_exam_five/data/services/api_services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_exam_five/ui/categories/categories_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,14 +13,23 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    final ApiProvider apiProvider = ApiProvider(apiClient: ApiClient());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => CategoryCubit(
+            categoryRepo: CategoryRepo(
+              apiProvider: apiProvider,
+            ),
+          ),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: CategoriesPage(),
       ),
-      home: SizedBox(),
     );
   }
 }
