@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exam_five/data/models/product_model/product_model.dart';
+import 'package:flutter_exam_five/data/services/local_notification_service.dart';
 
 Widget productsWidget({required List<ProductModel> products}) {
   return ListView.builder(
@@ -31,7 +32,7 @@ Widget productsWidget({required List<ProductModel> products}) {
               ),
             ),
             SizedBox(
-              width: 150,
+              width: 120,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +52,10 @@ Widget productsWidget({required List<ProductModel> products}) {
                 ],
               ),
             ),
+            IconButton(onPressed: () {
+               LocalNotificationService.localNotificationService
+                    .scheduleNotification(15);
+            }, icon: const Icon(Icons.shopping_bag,color: Colors.green,)),
             const SizedBox(
               height: 5,
             ),
