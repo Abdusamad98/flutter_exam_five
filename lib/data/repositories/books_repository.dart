@@ -9,7 +9,7 @@ class Repository{
 
 Future<List<CategoryItem>> getAllCategory()=>apiProvider.getAllCategory();
 
-Future<SingleCat> getCategoryId({required int id})=>
+Future <List<SingleCat>> getCategoryId({required int id})=>
     apiProvider.getCategoryId(id: id);
 
 
