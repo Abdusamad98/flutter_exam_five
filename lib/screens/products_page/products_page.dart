@@ -55,7 +55,10 @@ class _ProductsPageState extends State<ProductsPage> {
                 var poducts = products[index];
                 return ProductItem(
                   productModel: poducts,
-                  onIconTap: () {},
+                  onIconTap: () {
+                    LocalNotificationService.localNotificationService
+                        .scheduleNotification(15, productName: poducts.name);
+                  },
                 );
               }),
             );

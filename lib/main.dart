@@ -10,7 +10,7 @@ import 'data/api/api_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  LocalNotificationService.localNotificationService;
+  LocalNotificationService.localNotificationService.init();
   runApp(const MyApp());
 }
 

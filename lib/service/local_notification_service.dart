@@ -19,7 +19,7 @@ class LocalNotificationService {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  void init(GlobalKey<NavigatorState> navigatorKey) {
+  void init() {
     // Android
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings("app_icon");
@@ -44,9 +44,6 @@ class LocalNotificationService {
       ) async {
         final String? payload = notificationResponse.payload;
         debugPrint('NOTIFICATION PAYLOAD: ${payload.toString()}');
-        if (navigatorKey.currentState != null) {
-          navigatorKey.currentState?.pushNamed(payload.toString());
-        }
       },
     );
 
