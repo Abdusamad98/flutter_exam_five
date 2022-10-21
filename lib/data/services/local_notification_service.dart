@@ -21,7 +21,7 @@ class LocalNotificationService {
   void init() {
     // FOR ANDROID
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     // FOR IOS
     final DarwinInitializationSettings initializationSettingsDarwin =
@@ -89,10 +89,10 @@ class LocalNotificationService {
         android: AndroidNotificationDetails(
             androidNotificationChannel.id, androidNotificationChannel.name,
             priority: Priority.max,
-            icon: 'app_icon', // app icon
+            icon: '@mipmap/ic_launcher', // app icon
             playSound: true,
             showProgress: true,
-            largeIcon: const DrawableResourceAndroidBitmap('app_icon')),
+            largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher')),
       ),
       payload: data,
     );
