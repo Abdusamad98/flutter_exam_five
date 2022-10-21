@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'network_exceptions.dart';
+import '../network_exceptions.dart';
 
 class OpenApiClient {
   Dio dio = Dio(
