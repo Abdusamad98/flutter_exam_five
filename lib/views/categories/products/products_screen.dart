@@ -17,8 +17,9 @@ class ProductsScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       // I have used bloc_consumer because it has listener also and I don't need to initialize bloc_listener
-      body: BlocConsumer<ProductsCubit, ProductsState>(
-        listener: (contex, state) {
+      body: Column(
+        children: [
+          BlocListener<ProductsCubit, ProductsState>(listener: (contex, state) {
           if (state is ProductsOnFailure) {
             debugPrint("ProductsOnFailure");
           } else if (state is ProductsOnProgress) {
@@ -26,42 +27,47 @@ class ProductsScreen extends StatelessWidget {
           } else if (state is ProductsOnSuccess) {
             debugPrint("ProductsOnSuccess");
           }
-        },
-        builder: (context, state) {
-          if (state is ProductsOnProgress) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (state is ProductsOnSuccess) {
-            return GridView.builder(
-              itemCount: state.products.length,
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: 0.60,
-              ),
-              itemBuilder: (context, index) {
-                return ProductsItemView(
-                  productModel: state.products[index],
-                  onTap: () {
-                    UtilityFunctions.getMyToast(
-                        message: "It will showed in 15 sec");
-                    LocalNotificationService.localNotificationService
-                        .scheduleNotification(
-                      title: "Shop",
-                      body:
-                          "${categoryName}dagi ${state.products[index].name} muvaffaqiyatili qo'shildi",
-                    );
-                  },
-                );
+        }),
+          Expanded(
+            child: BlocBuilder<ProductsCubit, ProductsState>(
+              builder: (context, state) {
+                if (state is ProductsOnProgress) {
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+                } else if (state is ProductsOnSuccess) {
+                  return GridView.builder(
+                    itemCount: state.products.length,
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.60,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ProductsItemView(
+                        productModel: state.products[index],
+                        onTap: () {
+                          UtilityFunctions.getMyToast(
+                              message: "It will showed in 15 sec");
+                          LocalNotificationService.localNotificationService
+                              .scheduleNotification(
+                            title: "Shop",
+                            body:
+                                "${categoryName}dagi ${state.products[index].name} muvaffaqiyatili qo'shildi",
+                          );
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  return const SizedBox();
+                }
               },
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
