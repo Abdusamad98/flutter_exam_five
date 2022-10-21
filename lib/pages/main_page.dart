@@ -14,43 +14,54 @@ class MainPage extends StatelessWidget {
         title: const Text('Categories'),
         centerTitle: true,
       ),
-      body: BlocConsumer<CategoriesCubit, CategoriesState>(
-          listener: (context, state) {
-        switch (state.status) {
-          case FormzStatus.submissionInProgress:
-            debugPrint('Status inProgress');
-            break;
-          case FormzStatus.submissionSuccess:
-            debugPrint('Status success');
-            break;
-          case FormzStatus.submissionFailure:
-            debugPrint('Status failure');
-            break;
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: BlocConsumer<CategoriesCubit, CategoriesState>(
+            listener: (context, state) {
+          switch (state.status) {
+            case FormzStatus.submissionInProgress:
+              debugPrint('Status inProgress');
+              break;
+            case FormzStatus.submissionSuccess:
+              debugPrint('Status success');
+              break;
+            case FormzStatus.submissionFailure:
+              debugPrint('Status failure');
+              break;
 
-          default:
-            debugPrint('Another Status');
-        }
-      }, builder: (context, state) {
-        return state.status.isSubmissionInProgress
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView.builder(
-                itemCount: state.categories.length,
-                itemBuilder: (context, index) {
-                  var category = state.categories[index];
-                  return ListTile(
-                    leading: SizedBox(
-                        child: Image.network(
-                      category.categoryImageUrl,
-                      fit: BoxFit.fill,
-                    )),
-                    title: Text(category.categoryName),
-                    subtitle: Text(DateFormat().add_yMMMd().format(DateTime.parse(category.createdAt))),
-                  );
-                },
-              );
-      }),
+            default:
+              debugPrint('Another Status');
+          }
+        }, builder: (context, state) {
+          return state.status.isSubmissionInProgress
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                  itemCount: state.categories.length,
+                  itemBuilder: (context, index) {
+                    var category = state.categories[index];
+                    return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        tileColor: Colors.grey.shade200,
+                        leading: SizedBox(
+                          width: 100,
+                          height: double.infinity,
+                            child: Image.network(
+                          category.categoryImageUrl,
+                          fit: BoxFit.cover,
+                        )),
+                        title: Text(category.categoryName),
+                        subtitle: Text(DateFormat().add_yMMMd().format(DateTime.parse(category.createdAt))),
+                      ),
+                    );
+                  },
+                );
+        }),
+      ),
     );
   }
 }
