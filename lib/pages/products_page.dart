@@ -51,6 +51,7 @@ class _ProductsPageState extends State<ProductsPage> {
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               crossAxisCount: 2,
+              childAspectRatio: 0.8,
               children: List.generate(products.length, (index) {
                 var item = products[index];
                 return Stack(children: [
