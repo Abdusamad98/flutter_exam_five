@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_exam_five/cubit/get_categories_cubit.dart';
+import 'package:flutter_exam_five/cubits/get_categories/get_categories_cubit.dart';
+import 'package:flutter_exam_five/cubits/get_category_by_id/get_category_by_id_cubit.dart';
 import 'package:flutter_exam_five/ui/home/categories_screen.dart';
 
 void main() {
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => GetCategoriesCubit(),
         ),
+        BlocProvider(
+          create: (context) => GetCategoryByIdCubit(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
