@@ -23,7 +23,8 @@ class ApiProvider {
   Future<List<ProductModel>> getProducts({required int id}) async {
     try {
       Response response =
-          await Dio().get('https://third-exam.free.mockoapp.net/categories/{id}');
+          await Dio().get('https://third-exam.free.mockoapp.net/categories/$id');
+          print(response.data);
       var data = (response.data as List?)
               ?.map((products) => ProductModel.fromJson(products))
               .toList() ??
