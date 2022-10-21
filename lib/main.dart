@@ -1,20 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_exam_five/cubits/categories_cubit/categories_cubit.dart';
+import 'package:flutter_exam_five/cubits/products_cubit/products_cubit.dart';
+import 'package:flutter_exam_five/data/my_repository/my_repository.dart';
+import 'package:flutter_exam_five/data/services/api_provider.dart';
+import 'package:flutter_exam_five/pages/main_page.dart';
 
+// categories
+// https://third-exam.free.mockoapp.net/categories
+//products
+// https://third-exam.free.mockoapp.net/categories/{id}
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoriesCubit(
+            myRepository: MyRepository(apiProvider: ApiProvider()),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => ProductsCubit(
+            myRepository: MyRepository(apiProvider: ApiProvider()),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MainPage(),
       ),
-      home: SizedBox(),
     );
   }
 }
