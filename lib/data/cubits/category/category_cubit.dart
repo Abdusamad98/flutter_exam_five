@@ -27,6 +27,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       var categories = await categoryRepo.getAllCategories();
       emit(state.copyWith(myState: MyState.SUCCESS, categories: categories));
     } catch (error) {
+      print(error);
       emit(state.copyWith(myState: MyState.ERROR, errorText: "GET ALL CATEGORIES ERROR!!!"));
     }
   }
