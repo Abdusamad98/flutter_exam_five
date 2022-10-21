@@ -1,25 +1,38 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_exam_five/cubit/cubit/category_state.dart';
-import 'package:flutter_exam_five/data/models/category_model/category_model.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_exam_five/data/repostory/category_repostory.dart';
+import 'package:formz/formz.dart';
+
+import '../../data/models/category_model/category_model.dart';
+
+part 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit({
     required this.categoryRepository,
-  }) : super(CategoryInitial()) {
-    readSavedNews();
+  }) : super(
+          const CategoryState(
+            categories: [],
+            status: FormzStatus.pure,
+            errorText: "",
+          ),
+        ) {
+    getAllCategories();
   }
 
   final CategoryRepository categoryRepository;
 
-  void readSavedNews() async {
-    emit(GetCategoryProgress());
+  Future<void> getAllCategories() async {
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
-      List<CategoryModel> categories =
-          await categoryRepository.getAllCategory();
-      emit(GetCategoryInSuccess(categories: categories));
+      var categories = await categoryRepository.getAllCategories();
+      emit(state.copyWith(
+          status: FormzStatus.submissionSuccess, categories: categories));
     } catch (error) {
-      emit(GetCategoryInFailure(errorText: error.toString()));
+      print(error);
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errorText: "GET ALL CATEGORIES ERROR!!!"));
     }
   }
 }

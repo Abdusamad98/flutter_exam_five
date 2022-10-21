@@ -1,20 +1,27 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_exam_five/data/models/category_model/category_model.dart';
+part of 'category_cubit.dart';
 
-@immutable
-abstract class CategoryState {}
-
-class CategoryInitial extends CategoryState {}
-
-class GetCategoryProgress extends CategoryState {}
-
-class GetCategoryInSuccess extends CategoryState {
-  GetCategoryInSuccess({required this.categories});
+class CategoryState extends Equatable {
+  const CategoryState({
+    required this.categories,
+    required this.status,
+    required this.errorText,
+  });
 
   final List<CategoryModel> categories;
-}
-
-class GetCategoryInFailure extends CategoryState {
+  final FormzStatus status;
   final String errorText;
-  GetCategoryInFailure({required this.errorText});
+
+  CategoryState copyWith({
+    List<CategoryModel>? categories,
+    FormzStatus? status,
+    String? errorText,
+  }) =>
+      CategoryState(
+        categories: categories ?? this.categories,
+        status: status ?? this.status,
+        errorText: errorText ?? this.errorText,
+      );
+
+  @override
+  List<Object> get props => [categories, status, errorText];
 }
