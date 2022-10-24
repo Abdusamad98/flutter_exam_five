@@ -20,7 +20,7 @@ class ApiClient {
     dio.interceptors.add(
       (InterceptorsWrapper(
         onError: (error, handler) async {
-          debugPrint("ON ERROR GA KIRDI");
+          debugPrint("On Error Keldi");
           switch (error.type) {
             case DioErrorType.connectTimeout:
             case DioErrorType.sendTimeout:
@@ -49,12 +49,12 @@ class ApiClient {
           return handler.next(error);
         },
         onRequest: (requestOptions, handler) {
-          debugPrint("ON REQUEST GA KIRDI");
+          debugPrint("On Request Keldi");
           requestOptions.headers["Accept"] = "application/json";
           return handler.next(requestOptions);
         },
         onResponse: (response, handler) async {
-          debugPrint("ON RESPONSE GA KIRDI");
+          debugPrint("On Response Keldi");
           return handler.next(response);
         },
       )),
