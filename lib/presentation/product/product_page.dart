@@ -33,11 +33,11 @@ class _ProductsPageState extends State<ProductsPage> {
       body: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
           if (state is GetProductsInFailure) {
-            debugPrint("GET PRODUCTS IN FAILURE");
+            debugPrint("Get Products in Failure");
           } else if (state is GetProductsInSuccess) {
-            debugPrint("GET PRODUCTS IN SUCCESS");
+            debugPrint("Get Products in Success");
           } else if (state is GetProductsInProgress) {
-            debugPrint("GET PRODUCTS IN PROGRESS");
+            debugPrint("Get Products in Progress");
           }
         },
         builder: (context, state) {

@@ -11,7 +11,14 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Categories"),centerTitle: true,elevation: 0.0,),
+      appBar: AppBar(
+        title: const Text(
+          "Categories",
+          style: TextStyle(color: Colors.black, fontSize: 20),
+        ),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
           var st = state.myState;
