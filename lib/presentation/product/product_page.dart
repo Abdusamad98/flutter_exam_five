@@ -8,11 +8,11 @@ class ProductsPage extends StatefulWidget {
   const ProductsPage({
     Key? key,
     required this.categoryId,
-    required this.categName,
+    required this.categoryName,
   }) : super(key: key);
 
   final int categoryId;
-  final String categName;
+  final String categoryName;
 
   @override
   State<ProductsPage> createState() => _ProductsPageState();
@@ -29,7 +29,7 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.categName)),
+      appBar: AppBar(title: Text(widget.categoryName)),
       body: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
           if (state is GetProductsInFailure) {

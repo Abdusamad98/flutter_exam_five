@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_exam_five/cubit/category_cubit.dart';
-import 'package:flutter_exam_five/modeles/my_state.dart';
+import 'package:flutter_exam_five/modeles/state.dart';
 import 'package:flutter_exam_five/presentation/category/widget/category_page_item.dart';
 import 'package:flutter_exam_five/presentation/product/product_page.dart';
 
@@ -32,7 +32,7 @@ class CategoriesPage extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (_) => ProductsPage(
                           categoryId: categories[index].id,
-                          categName: categories[index].name,
+                          categoryName: categories[index].name,
                         ),
                       ),
                     );

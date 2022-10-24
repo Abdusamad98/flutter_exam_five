@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_exam_five/data/repository/category/category_repository.dart';
 import 'package:flutter_exam_five/modeles/category_item.dart';
-import 'package:flutter_exam_five/modeles/my_state.dart';
+import 'package:flutter_exam_five/modeles/state.dart';
 
 part 'category_state.dart';
 
@@ -28,7 +28,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       emit(state.copyWith(myState: MyState.SUCCESS, categories: categories));
     } catch (error) {
       print(error);
-      emit(state.copyWith(myState: MyState.ERROR, errorText: "GET ALL CATEGORIES ERROR!!!"));
+      emit(state.copyWith(myState: MyState.ERROR, errorText: "Get All Categories Error"));
     }
   }
 }
